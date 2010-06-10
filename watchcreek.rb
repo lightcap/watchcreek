@@ -39,16 +39,18 @@ if $0 == __FILE__
     puts "opening url"
     @doc = Hpricot(f)
   end
-  cfs = extract_cfs(@doc)
+  @cfs = extract_cfs(@doc)
+  @last_cfs = last_cfs
+  File.open(File.join(TMPDIR, 'watchcreek'), 'w') do |f|
+    f.puts @cfs
+  end
+  exit if last_cfs >= @cfs
+  
   SEVERITIES.each do |s|
     puts "testing against value: #{s[:value].to_f}"
-    if cfs.to_f >= s[:value].to_f
-      File.open(File.join(TMPDIR, 'watchcreek'), 'w') do |f|
-        f.puts cfs
-      end
-      exit if last_cfs >= cfs
+    if @cfs.to_f >= s[:value].to_f
       mail = TMail::Mail.new
-      message = "At #{cfs} CFS creek flow is #{s[:label]}. \n\nSee #{URL} for details."
+      message = "At #{@cfs} CFS creek flow is #{s[:label]}. \n\nSee #{URL} for details."
       mail.body = message
       mail.to = MAIL_TO
       mail.from = MAIL_FROM
