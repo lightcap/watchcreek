@@ -44,7 +44,7 @@ if $0 == __FILE__
   File.open(File.join(TMPDIR, 'watchcreek'), 'w') do |f|
     f.puts @cfs
   end
-  exit if last_cfs >= @cfs
+  exit if @last_cfs >= @cfs
   
   SEVERITIES.each do |s|
     puts "testing against value: #{s[:value].to_f}"
