@@ -13,7 +13,7 @@ if $0 == __FILE__
 
   URL = "http://www.usbr.gov/pn-bin/rtgraph.pl/?sta=TUMO&parm=Q"
   MAIL_TO = "matt@thekerns.net"
-  MAIL_CC = ""
+  MAIL_CC = "error_glory@hotmail.com"
   MAIL_FROM = "riverkeeper@thekerns.net"
   SUBJECT = "*** Neighborhood River Watch ***"
   PATTERN = /Last Value =\s+(\d+\.\d+)/
